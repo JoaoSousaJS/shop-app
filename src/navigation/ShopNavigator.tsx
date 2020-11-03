@@ -12,6 +12,7 @@ export const ShopStackNavigator = () => {
       <Stack.Screen
         name="productsOverview"
         component={ProductsOverviewScreen}
+        options={{ title: 'All Products' }}
       />
     </Stack.Navigator>
   );
