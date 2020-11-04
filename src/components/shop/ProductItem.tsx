@@ -1,10 +1,17 @@
 import React from 'react';
-import { Text, View, StyleSheet, Image, Button } from 'react-native';
+import {
+  Text,
+  View,
+  StyleSheet,
+  Image,
+  Button,
+  GestureResponderEvent,
+} from 'react-native';
 import { AppColors } from '../../constants/Color';
 import { Product } from '../../models/products';
 
 interface IProps extends Product {
-  onViewDetail: () => void;
+  onViewDetail: (event: GestureResponderEvent) => void;
   onAddToCart: () => void;
 }
 
