@@ -1,6 +1,6 @@
 import React from 'react';
-import { ProductItem } from '../../components/shop/ProductItem';
+import { ProductList } from '../../components/shop/ProductList';
 
 export const ProductsOverviewScreen = () => {
-  return <ProductItem />;
+  return <ProductList />;
 };
