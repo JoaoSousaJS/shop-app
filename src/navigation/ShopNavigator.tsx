@@ -15,7 +15,13 @@ export const ShopStackNavigator = () => {
         component={ProductsOverviewScreen}
         options={{ title: 'All Products' }}
       />
-      <Stack.Screen name="productsDetails" component={ProductDetailScreen} />
+      <Stack.Screen
+        name="productsDetails"
+        component={ProductDetailScreen}
+        options={({ route }) => ({
+          headerTitle: route.params.title,
+        })}
+      />
     </Stack.Navigator>
   );
 };

@@ -28,6 +28,7 @@ export const ProductList = (props: IProps) => {
           onViewDetail={() =>
             props.navigation.navigate('productsDetails', {
               productId: itemData.item.id,
+              title: itemData.item.title,
             })
           }
           onAddToCart={() => {}}

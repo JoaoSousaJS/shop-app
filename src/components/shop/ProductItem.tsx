@@ -6,6 +6,7 @@ import {
   Image,
   Button,
   GestureResponderEvent,
+  TouchableOpacity,
 } from 'react-native';
 import { AppColors } from '../../constants/Color';
 import { Product } from '../../models/products';
@@ -18,25 +19,31 @@ interface IProps extends Product {
 export const ProductItem = (props: IProps) => {
   return (
     <View style={styles.product}>
-      <View style={styles.imageContainer}>
-        <Image style={styles.image} source={{ uri: props.imageUrl }} />
-      </View>
-      <View style={styles.details}>
-        <Text style={styles.title}>{props.title}</Text>
-        <Text style={styles.price}>${props.price.toFixed(2)}</Text>
-      </View>
+      <View style={styles.touchable}>
+        <TouchableOpacity onPress={props.onViewDetail}>
+          <View>
+            <View style={styles.imageContainer}>
+              <Image style={styles.image} source={{ uri: props.imageUrl }} />
+            </View>
+            <View style={styles.details}>
+              <Text style={styles.title}>{props.title}</Text>
+              <Text style={styles.price}>${props.price.toFixed(2)}</Text>
+            </View>
 
-      <View style={styles.actions}>
-        <Button
-          color={AppColors.primary}
-          title="View Details"
-          onPress={props.onViewDetail}
-        />
-        <Button
-          color={AppColors.primary}
-          title="Add to Cart"
-          onPress={props.onAddToCart}
-        />
+            <View style={styles.actions}>
+              <Button
+                color={AppColors.primary}
+                title="View Details"
+                onPress={props.onViewDetail}
+              />
+              <Button
+                color={AppColors.primary}
+                title="Add to Cart"
+                onPress={props.onAddToCart}
+              />
+            </View>
+          </View>
+        </TouchableOpacity>
       </View>
     </View>
   );
@@ -87,5 +94,9 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     height: '15%',
     padding: 10,
+  },
+  touchable: {
+    borderRadius: 10,
+    overflow: 'hidden',
   },
 });
