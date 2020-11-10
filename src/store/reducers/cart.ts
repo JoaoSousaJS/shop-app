@@ -12,7 +12,7 @@ interface IAction {
   product: Product;
 }
 
-export default (state = initialState, action: IAction) => {
+export const cartReducer = (state = initialState, action: IAction) => {
   switch (action.type) {
     case ADD_TO_CART:
       const addedProduct = action.product;
