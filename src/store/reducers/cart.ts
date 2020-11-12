@@ -1,6 +1,6 @@
 import { CartItem } from '../../models/card-item';
 import { Product } from '../../models/products';
-import { ADD_TO_CART } from '../actions/cart';
+import { ADD_TO_CART, REMOVE_FROM_CART } from '../actions/cart';
 
 const initialState = {
   items: {},
@@ -10,6 +10,7 @@ const initialState = {
 interface IAction {
   type: string;
   product: Product;
+  pid: string;
 }
 
 export const cartReducer = (state = initialState, action: IAction) => {
@@ -36,6 +37,28 @@ export const cartReducer = (state = initialState, action: IAction) => {
         ...state,
         items: { ...state.items, [addedProduct.id]: updateOrNewCartItem },
         totalAmount: state.totalAmount + prodPrice,
+      };
+    case REMOVE_FROM_CART:
+      const selectedCartItem: CartItem = state.items[action.pid];
+      const currentQty = selectedCartItem.quantity;
+      let updatedCartItems;
+
+      if (currentQty > 1) {
+        const updatedCartItem = new CartItem(
+          selectedCartItem.quantity - 1,
+          selectedCartItem.productPrice,
+          selectedCartItem.productTitle,
+          selectedCartItem.sum - selectedCartItem.productPrice,
+        );
+        updatedCartItems = { ...state.items, [action.pid]: updatedCartItem };
+      } else {
+        updatedCartItems = { ...state.items };
+        delete updatedCartItems[action.pid];
+      }
+      return {
+        ...state,
+        items: updatedCartItems,
+        totalAmount: state.totalAmount - selectedCartItem.productPrice,
       };
   }
   return state;
