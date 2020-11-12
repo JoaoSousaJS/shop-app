@@ -22,7 +22,9 @@ export const CartScreen = () => {
       });
     }
 
-    return transformedCartItems;
+    return transformedCartItems.sort((a, b) =>
+      a.productId > b.productId ? 1 : -1,
+    );
   });
 
   const dispatch = useDispatch();
