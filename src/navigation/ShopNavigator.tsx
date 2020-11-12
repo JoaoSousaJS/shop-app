@@ -79,7 +79,31 @@ export const OrdersNavigator = () => {
       <OrderStack.Screen
         name="orders"
         component={OrdersScreen}
-        options={{ title: 'Your Orders' }}
+        options={({ navigation }) => ({
+          headerTitle: 'Your Orders',
+          headerLeft: () => (
+            <TouchableOpacity
+              onPress={() => navigation.dispatch(DrawerActions.openDrawer())}
+            >
+              <HeaderButtons HeaderButtonComponent={CustomHeaderButton}>
+                <Item
+                  title="Menu"
+                  iconName={Platform.OS === 'android' ? 'md-menu' : 'ios-menu'}
+                />
+              </HeaderButtons>
+            </TouchableOpacity>
+          ),
+          headerRight: () => (
+            <TouchableOpacity onPress={() => navigation.navigate('cart')}>
+              <HeaderButtons HeaderButtonComponent={CustomHeaderButton}>
+                <Item
+                  title="Cart"
+                  iconName={Platform.OS === 'android' ? 'md-cart' : 'ios-cart'}
+                />
+              </HeaderButtons>
+            </TouchableOpacity>
+          ),
+        })}
       />
     </OrderStack.Navigator>
   );
