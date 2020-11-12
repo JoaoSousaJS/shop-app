@@ -123,7 +123,7 @@ export const ShopDrawerNavigator = () => {
       screenOptions={{ headerShown: false }}
     >
       <ShopNavigator.Screen
-        name="home"
+        name="Home"
         component={ShopStackNavigator}
         options={() => ({
           drawerIcon: () => (
@@ -136,7 +136,7 @@ export const ShopDrawerNavigator = () => {
         })}
       />
       <ShopNavigator.Screen
-        name="orders"
+        name="Orders"
         component={OrdersNavigator}
         options={() => ({
           drawerIcon: () => (
