@@ -5,7 +5,6 @@ import { createStackNavigator } from '@react-navigation/stack';
 import { ProductDetailScreen } from '../screens/shop/ProductDetailScreen';
 import { ProductsOverviewScreen } from '../screens/shop/ProductsOverviewScreen';
 import { defaultNavigationOptions } from './ScreenOptions/screen-options';
-import { useNavigation } from '@react-navigation/native';
 import { ProductOverviewStackParamList } from './types/ProductOverview/RouteParamList';
 import { HeaderButtons, Item } from 'react-navigation-header-buttons';
 import { CustomHeaderButton } from '../components/UI/HeaderButton';
