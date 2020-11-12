@@ -9,7 +9,7 @@ import {
 import { Ionicons } from '@expo/vector-icons';
 
 interface IProps {
-  onRemove: Function;
+  onRemove: () => void;
   quantity: number;
   title: string;
   amount: number;
@@ -24,10 +24,7 @@ export const CartItem = (props: IProps) => {
       </View>
       <View style={styles.itemData}>
         <Text style={styles.mainText}>{props.amount.toFixed(2)}</Text>
-        <TouchableOpacity
-          onPress={() => props.onRemove}
-          style={styles.deleteButton}
-        >
+        <TouchableOpacity onPress={props.onRemove} style={styles.deleteButton}>
           <Ionicons
             name={Platform.OS === 'android' ? 'md-trash' : 'ios-trash'}
             size={23}
