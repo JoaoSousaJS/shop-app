@@ -5,9 +5,10 @@ import { CartItem } from '../../components/shop/CartItem';
 import { AppColors } from '../../constants/Color';
 import { ICartState } from '../../store/types/cart-item';
 import * as cartAction from '../../store/actions/cart';
+import * as orderAction from '../../store/actions/orders';
 
 export const CartScreen = () => {
-  const cartTotalAmout = useSelector(
+  const cartTotalAmonut = useSelector(
     (state: ICartState) => state.cart.totalAmount,
   );
   const cartItems = useSelector((state: ICartState) => {
@@ -33,13 +34,16 @@ export const CartScreen = () => {
     <View style={styles.screen}>
       <View style={styles.summary}>
         <Text style={styles.summaryText}>
-          Total: <Text style={styles.amount}>${cartTotalAmout.toFixed(2)}</Text>
+          Total:{' '}
+          <Text style={styles.amount}>${cartTotalAmonut.toFixed(2)}</Text>
         </Text>
         <Button
           color={AppColors.accent}
           title="Order Now"
-          onPress={() => {}}
           disabled={cartItems.length === 0}
+          onPress={() => {
+            dispatch(orderAction.addOrder(cartItems, cartTotalAmonut));
+          }}
         />
       </View>
       <FlatList
