@@ -4,4 +4,5 @@ export type ProductOverviewStackParamList = {
     productId: string;
     title: string;
   };
+  cart: undefined;
 };
