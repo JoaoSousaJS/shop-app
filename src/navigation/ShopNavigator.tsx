@@ -13,6 +13,7 @@ import { CartScreen } from '../screens/shop/CartScreen';
 import { OrdersScreen } from '../screens/shop/OrdersScreen';
 import { OrderStackParamList } from './types/orders/RouteParamList';
 import { AppColors } from '../constants/Color';
+import { DrawerActions } from '@react-navigation/native';
 
 const Stack = createStackNavigator<ProductOverviewStackParamList>();
 const OrderStack = createStackNavigator<OrderStackParamList>();
@@ -26,6 +27,18 @@ export const ShopStackNavigator = () => {
         component={ProductsOverviewScreen}
         options={({ navigation }) => ({
           title: 'All Products',
+          headerLeft: () => (
+            <TouchableOpacity
+              onPress={() => navigation.dispatch(DrawerActions.openDrawer())}
+            >
+              <HeaderButtons HeaderButtonComponent={CustomHeaderButton}>
+                <Item
+                  title="Menu"
+                  iconName={Platform.OS === 'android' ? 'md-menu' : 'ios-menu'}
+                />
+              </HeaderButtons>
+            </TouchableOpacity>
+          ),
           headerRight: () => (
             <TouchableOpacity onPress={() => navigation.navigate('cart')}>
               <HeaderButtons HeaderButtonComponent={CustomHeaderButton}>
@@ -41,8 +54,18 @@ export const ShopStackNavigator = () => {
       <Stack.Screen
         name="productsDetails"
         component={ProductDetailScreen}
-        options={({ route }) => ({
+        options={({ navigation, route }) => ({
           headerTitle: route.params.title,
+          headerRight: () => (
+            <TouchableOpacity onPress={() => navigation.navigate('cart')}>
+              <HeaderButtons HeaderButtonComponent={CustomHeaderButton}>
+                <Item
+                  title="Cart"
+                  iconName={Platform.OS === 'android' ? 'md-cart' : 'ios-cart'}
+                />
+              </HeaderButtons>
+            </TouchableOpacity>
+          ),
         })}
       />
       <Stack.Screen name="cart" component={CartScreen} />
