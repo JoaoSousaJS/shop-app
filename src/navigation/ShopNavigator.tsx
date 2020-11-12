@@ -14,6 +14,7 @@ import { OrdersScreen } from '../screens/shop/OrdersScreen';
 import { OrderStackParamList } from './types/orders/RouteParamList';
 import { AppColors } from '../constants/Color';
 import { DrawerActions } from '@react-navigation/native';
+import { Ionicons } from '@expo/vector-icons';
 
 const Stack = createStackNavigator<ProductOverviewStackParamList>();
 const OrderStack = createStackNavigator<OrderStackParamList>();
@@ -81,6 +82,12 @@ export const OrdersNavigator = () => {
         component={OrdersScreen}
         options={({ navigation }) => ({
           headerTitle: 'Your Orders',
+          drawerIcon: () => (
+            <Ionicons
+              name={Platform.OS === 'android' ? 'md-create' : 'ios-create'}
+              size={23}
+            />
+          ),
           headerLeft: () => (
             <TouchableOpacity
               onPress={() => navigation.dispatch(DrawerActions.openDrawer())}
@@ -115,8 +122,32 @@ export const ShopDrawerNavigator = () => {
       drawerContentOptions={{ activeTintColor: AppColors.primary }}
       screenOptions={{ headerShown: false }}
     >
-      <ShopNavigator.Screen name="home" component={ShopStackNavigator} />
-      <ShopNavigator.Screen name="orders" component={OrdersNavigator} />
+      <ShopNavigator.Screen
+        name="home"
+        component={ShopStackNavigator}
+        options={() => ({
+          drawerIcon: () => (
+            <Ionicons
+              name={Platform.OS === 'android' ? 'md-cart' : 'ios-cart'}
+              size={23}
+              color={AppColors.primary}
+            />
+          ),
+        })}
+      />
+      <ShopNavigator.Screen
+        name="orders"
+        component={OrdersNavigator}
+        options={() => ({
+          drawerIcon: () => (
+            <Ionicons
+              name={Platform.OS === 'android' ? 'md-list' : 'ios-list'}
+              size={23}
+              color={AppColors.primary}
+            />
+          ),
+        })}
+      />
     </ShopNavigator.Navigator>
   );
 };
