@@ -15,9 +15,11 @@ import { OrderStackParamList } from './types/orders/RouteParamList';
 import { AppColors } from '../constants/Color';
 import { DrawerActions } from '@react-navigation/native';
 import { Ionicons } from '@expo/vector-icons';
+import { UserProductsScreen } from '../screens/user/UserProductsScreen';
 
 const Stack = createStackNavigator<ProductOverviewStackParamList>();
 const OrderStack = createStackNavigator<OrderStackParamList>();
+const UserStack = createStackNavigator();
 const ShopNavigator = createDrawerNavigator();
 
 export const ShopStackNavigator = () => {
@@ -116,6 +118,48 @@ export const OrdersNavigator = () => {
   );
 };
 
+export const UserNavigator = () => {
+  return (
+    <UserStack.Navigator screenOptions={defaultNavigationOptions}>
+      <UserStack.Screen
+        name="user"
+        component={UserProductsScreen}
+        options={({ navigation }) => ({
+          headerTitle: 'User Products',
+          drawerIcon: () => (
+            <Ionicons
+              name={Platform.OS === 'android' ? 'md-create' : 'ios-create'}
+              size={23}
+            />
+          ),
+          headerLeft: () => (
+            <TouchableOpacity
+              onPress={() => navigation.dispatch(DrawerActions.openDrawer())}
+            >
+              <HeaderButtons HeaderButtonComponent={CustomHeaderButton}>
+                <Item
+                  title="Menu"
+                  iconName={Platform.OS === 'android' ? 'md-menu' : 'ios-menu'}
+                />
+              </HeaderButtons>
+            </TouchableOpacity>
+          ),
+          headerRight: () => (
+            <TouchableOpacity onPress={() => navigation.navigate('cart')}>
+              <HeaderButtons HeaderButtonComponent={CustomHeaderButton}>
+                <Item
+                  title="Cart"
+                  iconName={Platform.OS === 'android' ? 'md-cart' : 'ios-cart'}
+                />
+              </HeaderButtons>
+            </TouchableOpacity>
+          ),
+        })}
+      />
+    </UserStack.Navigator>
+  );
+};
+
 export const ShopDrawerNavigator = () => {
   return (
     <ShopNavigator.Navigator
@@ -142,6 +186,19 @@ export const ShopDrawerNavigator = () => {
           drawerIcon: () => (
             <Ionicons
               name={Platform.OS === 'android' ? 'md-list' : 'ios-list'}
+              size={23}
+              color={AppColors.primary}
+            />
+          ),
+        })}
+      />
+      <ShopNavigator.Screen
+        name="User Products"
+        component={UserNavigator}
+        options={() => ({
+          drawerIcon: () => (
+            <Ionicons
+              name={Platform.OS === 'android' ? 'md-create' : 'ios-create'}
               size={23}
               color={AppColors.primary}
             />
