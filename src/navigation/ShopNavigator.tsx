@@ -144,16 +144,6 @@ export const UserNavigator = () => {
               </HeaderButtons>
             </TouchableOpacity>
           ),
-          headerRight: () => (
-            <TouchableOpacity onPress={() => navigation.navigate('cart')}>
-              <HeaderButtons HeaderButtonComponent={CustomHeaderButton}>
-                <Item
-                  title="Cart"
-                  iconName={Platform.OS === 'android' ? 'md-cart' : 'ios-cart'}
-                />
-              </HeaderButtons>
-            </TouchableOpacity>
-          ),
         })}
       />
     </UserStack.Navigator>
