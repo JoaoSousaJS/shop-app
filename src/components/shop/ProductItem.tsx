@@ -4,23 +4,22 @@ import {
   View,
   StyleSheet,
   Image,
-  Button,
   GestureResponderEvent,
   TouchableOpacity,
 } from 'react-native';
-import { AppColors } from '../../constants/Color';
 import { Product } from '../../models/products';
 
 interface IProps extends Product {
-  onViewDetail: (event: GestureResponderEvent) => void;
+  onSelect: (event: GestureResponderEvent) => void;
   onAddToCart: () => void;
+  children: string;
 }
 
 export const ProductItem = (props: IProps) => {
   return (
     <View style={styles.product}>
       <View style={styles.touchable}>
-        <TouchableOpacity onPress={props.onViewDetail}>
+        <TouchableOpacity onPress={props.onSelect}>
           <View>
             <View style={styles.imageContainer}>
               <Image style={styles.image} source={{ uri: props.imageUrl }} />
@@ -30,18 +29,7 @@ export const ProductItem = (props: IProps) => {
               <Text style={styles.price}>${props.price.toFixed(2)}</Text>
             </View>
 
-            <View style={styles.actions}>
-              <Button
-                color={AppColors.primary}
-                title="View Details"
-                onPress={props.onViewDetail}
-              />
-              <Button
-                color={AppColors.primary}
-                title="Add to Cart"
-                onPress={props.onAddToCart}
-              />
-            </View>
+            <View style={styles.actions}>{props.children}</View>
           </View>
         </TouchableOpacity>
       </View>
