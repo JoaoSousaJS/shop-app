@@ -13,6 +13,7 @@ interface ICartItem {
   quantity: number;
   productTitle: string;
   sum: number;
+  productId: string;
 }
 
 export const OrderItem = (props: IOrderItem) => {
@@ -35,6 +36,7 @@ export const OrderItem = (props: IOrderItem) => {
         <View style={styles.detailItem}>
           {props.items.map((cartItem: ICartItem) => (
             <CartItem
+              key={cartItem.productId}
               title={cartItem.productTitle}
               amount={cartItem.sum}
               quantity={cartItem.quantity}
