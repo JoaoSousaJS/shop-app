@@ -16,6 +16,7 @@ import { AppColors } from '../constants/Color';
 import { DrawerActions } from '@react-navigation/native';
 import { Ionicons } from '@expo/vector-icons';
 import { UserProductsScreen } from '../screens/user/UserProductsScreen';
+import { EditProductsScreen } from '../screens/user/EditProductsScreen';
 
 const Stack = createStackNavigator<ProductOverviewStackParamList>();
 const OrderStack = createStackNavigator<OrderStackParamList>();
@@ -144,8 +145,21 @@ export const UserNavigator = () => {
               </HeaderButtons>
             </TouchableOpacity>
           ),
+          headerRight: () => (
+            <TouchableOpacity onPress={() => navigation.navigate('edit')}>
+              <HeaderButtons HeaderButtonComponent={CustomHeaderButton}>
+                <Item
+                  title="Add"
+                  iconName={
+                    Platform.OS === 'android' ? 'md-create' : 'ios-create'
+                  }
+                />
+              </HeaderButtons>
+            </TouchableOpacity>
+          ),
         })}
       />
+      <UserStack.Screen name="edit" component={EditProductsScreen} />
     </UserStack.Navigator>
   );
 };
@@ -183,7 +197,7 @@ export const ShopDrawerNavigator = () => {
         })}
       />
       <ShopNavigator.Screen
-        name="User Products"
+        name="Admin"
         component={UserNavigator}
         options={() => ({
           drawerIcon: () => (

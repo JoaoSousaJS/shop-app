@@ -1,3 +1,4 @@
+import { useNavigation } from '@react-navigation/native';
 import React from 'react';
 import { FlatList, Button } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
@@ -17,6 +18,12 @@ export const UserProductsScreen = () => {
     (state: IState) => state.products.userProducts,
   );
   const dispatch = useDispatch();
+
+  const navigation = useNavigation();
+
+  const handleEditProduct = (id: string) => {
+    navigation.navigate('edit', { productId: id });
+  };
   return (
     <FlatList
       data={userProducts}
@@ -25,9 +32,13 @@ export const UserProductsScreen = () => {
           imageUrl={itemData.item.imageUrl}
           title={itemData.item.title}
           price={itemData.item.price}
-          onSelect={() => {}}
+          onSelect={() => handleEditProduct(itemData.item.id)}
         >
-          <Button color={AppColors.primary} title="Edit" onPress={() => {}} />
+          <Button
+            color={AppColors.primary}
+            title="Edit"
+            onPress={() => handleEditProduct(itemData.item.id)}
+          />
           <Button
             color={AppColors.primary}
             title="Delete"
