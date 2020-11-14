@@ -1,12 +1,14 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import { useNavigation, useRoute } from '@react-navigation/native';
 import { View, Text, StyleSheet, ScrollView, TextInput } from 'react-native';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { IStateProducts } from '../../store/types/product-state';
+import * as productAction from '../../store/actions/products';
 
 export const EditProductsScreen = () => {
   const navigation = useNavigation();
   const route = useRoute();
+  const dispatch = useDispatch();
   const prodId = route.params.productId;
   const editedProduct = useSelector((state: IStateProducts) =>
     state.products.userProducts.find((prod) => prod.id === prodId),
@@ -22,8 +24,17 @@ export const EditProductsScreen = () => {
   );
 
   const submitHandler = useCallback(() => {
+    if (editedProduct) {
+      dispatch(
+        productAction.updateProduct(prodId, title, description, imageUrl),
+      );
+    } else {
+      dispatch(
+        productAction.createProduct(title, description, imageUrl, +price),
+      );
+    }
     console.log('submit');
-  }, []);
+  }, [description, editedProduct, dispatch, imageUrl, price, prodId, title]);
 
   useEffect(() => {
     navigation.setParams({ save: submitHandler });
