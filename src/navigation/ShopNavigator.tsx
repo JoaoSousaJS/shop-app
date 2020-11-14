@@ -146,7 +146,7 @@ export const UserNavigator = () => {
             </TouchableOpacity>
           ),
           headerRight: () => (
-            <TouchableOpacity onPress={() => navigation.navigate('edit')}>
+            <TouchableOpacity onPress={() => navigation.navigate('edit', {})}>
               <HeaderButtons HeaderButtonComponent={CustomHeaderButton}>
                 <Item
                   title="Add"
@@ -159,7 +159,25 @@ export const UserNavigator = () => {
           ),
         })}
       />
-      <UserStack.Screen name="edit" component={EditProductsScreen} />
+      <UserStack.Screen
+        name="edit"
+        component={EditProductsScreen}
+        options={({ navigation, route }) => ({
+          headerTitle: 'Manage Product',
+          headerRight: () => (
+            <TouchableOpacity onPress={() => {}}>
+              <HeaderButtons HeaderButtonComponent={CustomHeaderButton}>
+                <Item
+                  title="Save"
+                  iconName={
+                    Platform.OS === 'android' ? 'md-checkmark' : 'ios-checkmark'
+                  }
+                />
+              </HeaderButtons>
+            </TouchableOpacity>
+          ),
+        })}
+      />
     </UserStack.Navigator>
   );
 };
