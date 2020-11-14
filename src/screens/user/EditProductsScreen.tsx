@@ -1,10 +1,11 @@
-import { useRoute } from '@react-navigation/native';
-import React, { useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
+import { useNavigation, useRoute } from '@react-navigation/native';
 import { View, Text, StyleSheet, ScrollView, TextInput } from 'react-native';
 import { useSelector } from 'react-redux';
 import { IStateProducts } from '../../store/types/product-state';
 
 export const EditProductsScreen = () => {
+  const navigation = useNavigation();
   const route = useRoute();
   const prodId = route.params.productId;
   const editedProduct = useSelector((state: IStateProducts) =>
@@ -20,7 +21,13 @@ export const EditProductsScreen = () => {
     editedProduct ? editedProduct.description : '',
   );
 
-  console.log(prodId);
+  const submitHandler = useCallback(() => {
+    console.log('submit');
+  }, []);
+
+  useEffect(() => {
+    navigation.setParams({ save: submitHandler });
+  }, [submitHandler, navigation]);
 
   return (
     <ScrollView>
