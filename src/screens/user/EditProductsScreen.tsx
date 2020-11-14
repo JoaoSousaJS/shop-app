@@ -28,15 +28,22 @@ export const EditProductsScreen = () => {
       dispatch(
         productAction.updateProduct(prodId, title, description, imageUrl),
       );
-      navigation.goBack();
     } else {
       dispatch(
         productAction.createProduct(title, description, imageUrl, +price),
       );
-      navigation.goBack();
     }
-    console.log('submit');
-  }, [description, editedProduct, dispatch, imageUrl, price, prodId, title]);
+    navigation.goBack();
+  }, [
+    description,
+    editedProduct,
+    dispatch,
+    imageUrl,
+    price,
+    prodId,
+    title,
+    navigation,
+  ]);
 
   useEffect(() => {
     navigation.setParams({ save: submitHandler });
