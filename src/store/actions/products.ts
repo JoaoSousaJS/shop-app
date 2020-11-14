@@ -28,16 +28,14 @@ export const updateProduct = (
   title: string,
   description: string,
   imageUrl: string,
-  price: string,
 ) => {
   return {
-    type: CREATE_PRODUCT,
+    type: UPDATE_PRODUCT,
     pid: id,
     productData: {
       title,
       description,
       imageUrl,
-      price,
     },
   };
 };
