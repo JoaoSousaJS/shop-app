@@ -8,6 +8,7 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import { Product } from '../../models/products';
+import { Card } from '../UI/Card';
 
 interface IProps extends Product {
   onSelect: (event: GestureResponderEvent) => void;
@@ -17,7 +18,7 @@ interface IProps extends Product {
 
 export const ProductItem = (props: IProps) => {
   return (
-    <View style={styles.product}>
+    <Card style={styles.product}>
       <View style={styles.touchable}>
         <TouchableOpacity onPress={props.onSelect}>
           <View>
@@ -33,22 +34,12 @@ export const ProductItem = (props: IProps) => {
           </View>
         </TouchableOpacity>
       </View>
-    </View>
+    </Card>
   );
 };
 
 const styles = StyleSheet.create({
   product: {
-    shadowColor: 'black',
-    shadowOpacity: 0.26,
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
-    shadowRadius: 8,
-    elevation: 5,
-    borderRadius: 10,
-    backgroundColor: 'white',
     height: 300,
     margin: 20,
   },
