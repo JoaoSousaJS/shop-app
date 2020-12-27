@@ -17,11 +17,13 @@ import { DrawerActions } from '@react-navigation/native';
 import { Ionicons } from '@expo/vector-icons';
 import { UserProductsScreen } from '../screens/user/UserProductsScreen';
 import { EditProductsScreen } from '../screens/user/EditProductsScreen';
+import { AuthScreen } from '../screens/user/AuthScreen';
 
 const Stack = createStackNavigator<ProductOverviewStackParamList>();
 const OrderStack = createStackNavigator<OrderStackParamList>();
 const UserStack = createStackNavigator();
 const ShopNavigator = createDrawerNavigator();
+const AuthStack = createStackNavigator();
 
 export const ShopStackNavigator = () => {
   return (
@@ -232,5 +234,13 @@ export const ShopDrawerNavigator = () => {
         })}
       />
     </ShopNavigator.Navigator>
+  );
+};
+
+export const AuthNavigator = () => {
+  return (
+    <AuthStack.Navigator>
+      <AuthStack.Screen name="Authenticate" component={AuthScreen} />
+    </AuthStack.Navigator>
   );
 };

@@ -8,7 +8,10 @@ import ReduxThunk from 'redux-thunk';
 import { Provider } from 'react-redux';
 import { productReducer } from './src/store/reducers/products';
 import { cartReducer } from './src/store/reducers/cart';
-import { ShopDrawerNavigator } from './src/navigation/ShopNavigator';
+import {
+  AuthNavigator,
+  ShopDrawerNavigator,
+} from './src/navigation/ShopNavigator';
 import { ordersReducer } from './src/store/reducers/orders';
 
 const rootReducers = combineReducers({
@@ -41,7 +44,7 @@ export default function App() {
   return (
     <NavigationContainer>
       <Provider store={store}>
-        <ShopDrawerNavigator />
+        <AuthNavigator />
       </Provider>
     </NavigationContainer>
   );

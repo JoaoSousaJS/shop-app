@@ -11,14 +11,15 @@ interface IProps {
   multiline?: boolean;
   numberOfLines?: number;
   initialValue: string;
-  initiallyValid: boolean;
+  initiallyValid?: boolean;
   required?: boolean;
-  email?: string;
+  email?: boolean;
   min?: number;
   max?: number;
   minLength?: number;
   onInputChange: Function;
   id: string;
+  secureTextEntry?: boolean;
 }
 
 interface IAction {
