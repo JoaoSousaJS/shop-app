@@ -1,13 +1,20 @@
 import { StackNavigationProp } from '@react-navigation/stack';
-import React from 'react';
-import { FlatList, Button } from 'react-native';
+import React, { useEffect, useState, useCallback } from 'react';
+import {
+  View,
+  FlatList,
+  Button,
+  ActivityIndicator,
+  StyleSheet,
+  Text,
+} from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import { ProductDetailStackParamList } from '../../navigation/types/ProductDetail/RouteParamList';
 import { IStateProducts } from '../../store/types/product-state';
 import { ProductItem } from './ProductItem';
 import * as cartActions from '../../store/actions/cart';
+import * as productActions from '../../store/actions/products';
 import { AppColors } from '../../constants/Color';
-
 interface IProps {
   navigation: StackNavigationProp<
     ProductDetailStackParamList,
@@ -16,10 +23,33 @@ interface IProps {
 }
 
 export const ProductList = (props: IProps) => {
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState('');
   const products = useSelector(
     (state: IStateProducts) => state.products.availableProducts,
   );
   const dispatch = useDispatch();
+
+  const loadProducts = useCallback(async () => {
+    setError('');
+    setIsLoading(true);
+    try {
+      await dispatch(productActions.fetchProducts());
+    } catch (err) {
+      setError(err.message);
+    }
+    setIsLoading(false);
+  }, [dispatch, setIsLoading, setError]);
+
+  useEffect(() => {
+    loadProducts();
+  }, [dispatch, loadProducts]);
+
+  useEffect(() => {
+    const willFocusSub = props.navigation.addListener('focus', loadProducts);
+
+    return willFocusSub;
+  }, [loadProducts, props.navigation]);
 
   const selectHandler = (id: string, title: string) => {
     props.navigation.navigate('productsDetails', {
@@ -27,6 +57,35 @@ export const ProductList = (props: IProps) => {
       title: title,
     });
   };
+
+  if (error) {
+    return (
+      <View style={styles.centered}>
+        <Text>An error ocurred!</Text>
+        <Button
+          title="Try again"
+          onPress={loadProducts}
+          color={AppColors.primary}
+        />
+      </View>
+    );
+  }
+
+  if (isLoading) {
+    return (
+      <View style={styles.centered}>
+        <ActivityIndicator size="large" color={AppColors.primary} />
+      </View>
+    );
+  }
+
+  if (!isLoading && products.length === 0) {
+    return (
+      <View style={styles.centered}>
+        <Text>No products found.</Text>
+      </View>
+    );
+  }
   return (
     <FlatList
       data={products}
@@ -56,3 +115,7 @@ export const ProductList = (props: IProps) => {
     />
   );
 };
+
+const styles = StyleSheet.create({
+  centered: { flex: 1, justifyContent: 'center', alignItems: 'center' },
+});

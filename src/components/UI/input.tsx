@@ -94,7 +94,7 @@ export const Input = (props: IProps) => {
         {...props}
         style={styles.input}
         value={inputState.value}
-        onChangeText={textChangeHandler.bind(this, 'title')}
+        onChangeText={textChangeHandler}
         onBlur={lostFocusHandler}
       />
       {!inputState.isValid && (

@@ -13,7 +13,7 @@ import { Card } from '../UI/Card';
 interface IProps extends Product {
   onSelect: (event: GestureResponderEvent) => void;
   onAddToCart: () => void;
-  children: string;
+  children: React.ReactNode;
 }
 
 export const ProductItem = (props: IProps) => {

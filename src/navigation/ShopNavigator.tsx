@@ -165,7 +165,11 @@ export const UserNavigator = () => {
         options={({ navigation, route }) => ({
           headerTitle: 'Manage Product',
           headerRight: () => (
-            <TouchableOpacity onPress={() => route.params.save()}>
+            <TouchableOpacity
+              onPress={() => {
+                route.params.save();
+              }}
+            >
               <HeaderButtons HeaderButtonComponent={CustomHeaderButton}>
                 <Item
                   title="Save"
