@@ -1,5 +1,5 @@
 import { Order } from '../../models/orders';
-import { ADD_ORDER } from '../actions/orders';
+import { ADD_ORDER, SET_ORDERS } from '../actions/orders';
 
 const initialState = {
   orders: [],
@@ -7,20 +7,27 @@ const initialState = {
 
 interface IAction {
   type: string;
+  orders: [];
   orderDate: {
     items: {};
     amount: number;
+    id: string;
+    date: Date;
   };
 }
 
 export const ordersReducer = (state = initialState, action: IAction) => {
   switch (action.type) {
+    case SET_ORDERS:
+      return {
+        orders: action.orders,
+      };
     case ADD_ORDER:
       const newOrder = new Order(
-        new Date().toString(),
+        action.orderDate.id,
         action.orderDate.items,
         action.orderDate.amount,
-        new Date(),
+        action.orderDate.date,
       );
       return {
         ...state,
