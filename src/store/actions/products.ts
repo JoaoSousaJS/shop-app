@@ -9,7 +9,7 @@ export const fetchProducts = () => {
   return async (dispatch: any) => {
     try {
       const response = await fetch(
-        'https://rn-complete-guide-940e3-default-rtdb.firebaseio.com/products.json',
+        'https://rn-complete-guide-940e3-default-rtdb.''io.com/products.json',
       );
 
       if (!response.ok) {
@@ -41,7 +41,7 @@ export const fetchProducts = () => {
 export const deleteProduct = (productId: string) => {
   return async (dispatch: any) => {
     const response = await fetch(
-      `https://rn-complete-guide-940e3-default-rtdb.firebaseio.com/products/${productId}.json`,
+      `https://rn-complete-guide-940e3-default-rtdb.''io.com/products/${productId}.json`,
       {
         method: 'DELETE',
       },
@@ -63,7 +63,7 @@ export const createProduct = (
 ) => {
   return async (dispatch: any) => {
     const response = await fetch(
-      'https://rn-complete-guide-940e3-default-rtdb.firebaseio.com/products.json',
+      'https://rn-complete-guide-940e3-default-rtdb.''io.com/products.json',
       {
         method: 'POST',
         headers: {
@@ -102,7 +102,7 @@ export const updateProduct = (
   return async (dispatch: any) => {
     try {
       const response = await fetch(
-        `https://rn-complete-guide-940e3-default-rtdb.firebaseio.com/products/${id}.json`,
+        `https://rn-complete-guide-940e3-default-rtdb.''io.com/products/${id}.json`,
         {
           method: 'PATCH',
           headers: {

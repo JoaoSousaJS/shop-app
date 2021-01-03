@@ -7,7 +7,7 @@ export const fetchProducts = () => {
   return async (dispatch: any) => {
     try {
       const response = await fetch(
-        'https://rn-complete-guide-940e3-default-rtdb.firebaseio.com/orders/u1.json',
+        'https://rn-complete-guide-940e3-default-rtdb.''io.com/orders/u1.json',
       );
 
       if (!response.ok) {
@@ -38,7 +38,7 @@ export const addOrder = (cartItems: Object, totalAmount: number) => {
   return async (dispatch: any) => {
     const date = new Date();
     const response = await fetch(
-      'https://rn-complete-guide-940e3-default-rtdb.firebaseio.com/orders/u1.json',
+      'https://rn-complete-guide-940e3-default-rtdb.''io.com/orders/u1.json',
       {
         method: 'POST',
         headers: {

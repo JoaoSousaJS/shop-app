@@ -45,16 +45,20 @@ export const AuthScreen = (props) => {
               onInputChange={() => {}}
               initialValue=""
             />
-            <Button
-              title="Login"
-              color={AppColors.primary}
-              onPress={() => {}}
-            />
-            <Button
-              title="Sign Up"
-              color={AppColors.accent}
-              onPress={() => {}}
-            />
+            <View style={styles.buttonContainer}>
+              <Button
+                title="Login"
+                color={AppColors.primary}
+                onPress={() => {}}
+              />
+            </View>
+            <View style={styles.buttonContainer}>
+              <Button
+                title="Sign Up"
+                color={AppColors.accent}
+                onPress={() => {}}
+              />
+            </View>
           </ScrollView>
         </Card>
       </LinearGradient>
@@ -77,5 +81,8 @@ const styles = StyleSheet.create({
 
     justifyContent: 'center',
     alignItems: 'center',
+  },
+  buttonContainer: {
+    marginTop: 10,
   },
 });
